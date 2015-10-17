@@ -24,12 +24,12 @@ public class Main {
         try {
             StayPointCalculator spc = new StayPointCalculator(30, 300);
             //get points
-            ArrayList<GPSPoint> pointArray = GPSPointExtractor.extractFromFile("./resource/366_03.txt");
+            ArrayList<GPSPoint> pointArray = GPSPointExtractor.extractFromFile("./resource/6665_02.txt");
             //calculate
             ArrayList<StayPoint> stayPointArray = spc.extractStayPoints(pointArray);
 
             System.out.println("--- result ---");
-            String path = "output/366_03_30_300.txt";
+            String path = "output/6665_02_30_300.txt";
             String s = "name,date time,longitude,latitude\n";
             MyFile.writeToFile(path, s);
             for (StayPoint sp : stayPointArray) {
