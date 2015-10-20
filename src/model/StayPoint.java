@@ -81,4 +81,8 @@ public class StayPoint {
             System.out.println("(" + p.getLat() + ", " + p.getLng() + ", " + p.getTime() + ")");
         }
     }
+
+    public int size() {
+        return arr.size();
+    }
 }

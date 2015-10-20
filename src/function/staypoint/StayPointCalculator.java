@@ -42,7 +42,6 @@ public class StayPointCalculator {
 
             //khởi tạo SP
             StayPoint sp = new StayPoint();
-            sp.insertPoint(pi);
             k = j;  // điểm cuối của SP
 
             // chọn điểm đầu tiên là i, lần lượt tìm các điểm j tiếp theo của SP
@@ -52,8 +51,6 @@ public class StayPointCalculator {
 
                 // check condition of distance 
                 if (dist < distThresh) {
-                    // add new point
-                    sp.insertPoint(pj);
                     token = 1;
                     k = j;
                 } // kết thúc duyệt j
@@ -71,6 +68,10 @@ public class StayPointCalculator {
                 deltaTime = GPSPoint.interval(pi.getTime(), pj.getTime());
 
                 if (deltaTime > timeThresh) {
+                    int l;
+                    for (l = i; l <= k; l++) {
+                        sp.getArr().add(arrLog.get(l));
+                    }
                     sp.setStartTime(pi.getTime());
                     sp.setEndTime(pj.getTime());
 
@@ -82,6 +83,11 @@ public class StayPointCalculator {
                 i = k;
             }
             i++;
+        }
+        System.out.println("--- end calculate sp ---");
+        System.out.println("there are " + arrStayPoints.size() + " SP");
+        for (StayPoint sp : arrStayPoints) {
+            System.out.println("-" + sp.size());
         }
         return arrStayPoints;
     }

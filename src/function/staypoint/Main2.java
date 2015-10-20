@@ -16,7 +16,7 @@ import utils.MyFile;
  *
  * @author trungtran.vn
  */
-public class Main {
+public class Main2 {
 
     public static void main(String[] args) {
         try {
@@ -27,10 +27,12 @@ public class Main {
             ArrayList<StayPoint> stayPointArray = spc.extractStayPoints(pointArray);
 
             System.out.println("--- result ---");
-            String path = "output/366_02_30_300_p.txt";
-            String s = "name,date time,longitude,latitude\n";
-            MyFile.writeToFile(path, s);
-            for (StayPoint sp : stayPointArray) {
+            // moi stay point in ra 1 file chua tat ca cac point trong sp do
+            for (int i = 0; i < stayPointArray.size(); i++) {
+                String path = "output/listpoint/366_02_30_300_p" + i + ".txt";
+                String s = "name,date time,longitude,latitude\n";
+                MyFile.writeToFile(path, s);
+                StayPoint sp = stayPointArray.get(i);
                 for (GPSPoint p : sp.getArr()) {
                     s = "366,"
                             + p.getTime() + ","
@@ -38,10 +40,10 @@ public class Main {
                             + p.getLat() + "\n";
                     MyFile.writeToFile(path, s);
                 }
+
             }
         } catch (IOException | NumberFormatException ex) {
             System.out.println("read file error");
         }
     }
-
 }
