@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NetbeansProjects/GR2/src/function/staypoint/StayPointCalculator.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/function/staypoint/MainFrame.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/function/staypoint/Main.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/model/StayPoint.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/function/staypoint/Main2.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/model/place_api/Photo.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/utils/http/ClientRequest.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/model/place_api/test.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/model/place_api/NearBySearchResult.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/model/place_api/Result.java</file>
         </group>
     </open-files>
 </project-private>

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import model.GPSPoint;
 import model.StayPoint;
 import utils.GPSPointExtractor;
-import utils.MyFile;
+import utils.file.MyFile;
 
 /**
  *

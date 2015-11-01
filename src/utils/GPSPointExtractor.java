@@ -4,6 +4,7 @@
  */
 package utils;
 
+import utils.file.MyFile;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class GPSPointExtractor {
     public static ArrayList<GPSPoint> extractFromFile(String filePath) throws IOException, NumberFormatException {
         ArrayList<GPSPoint> arr = new ArrayList();
 
-        String typeFile = MyFile.checkTypeOfFile(filePath);
+        String typeFile = MyFile.getTypeOfFile(filePath);
         switch (typeFile) {
             case "plt":
                 arr = extractFromPltFile(filePath);

@@ -1,4 +1,4 @@
-package utils;
+package utils.file;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -75,7 +75,7 @@ public class MyFile {
         }
     }
 
-    public static String checkTypeOfFile(String path) {
+    public static String getTypeOfFile(String path) {
         // check file type
         List<String> types = Arrays.asList(path.split("\\."));
         System.out.println(path);
