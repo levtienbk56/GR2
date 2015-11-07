@@ -1,0 +1,4 @@
+Xi Cui Lu,[route]
+Muslim Ami'er Restaurant,[restaurant, food, point_of_interest, establishment]
+金爵康体健身,[establishment]
+Fengtai,[sublocality_level_1, sublocality, political]

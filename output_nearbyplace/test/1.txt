@@ -1,0 +1,5 @@
+Jiu Gong Dong Lu,[route]
+金宫府酒家,[restaurant, food, point_of_interest, establishment]
+旧宫公交IC卡充值点,[establishment]
+Jiugong,[bus_station, transit_station, point_of_interest, establishment]
+Daxing,[sublocality_level_1, sublocality, political]

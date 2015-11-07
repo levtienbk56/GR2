@@ -22,11 +22,7 @@ import java.util.logging.Logger;
 public class MyFile {
 
     public static void main(String[] args) {
-        try {
-            System.out.println(readFile("366.txt").readLine());
-        } catch (IOException ex) {
-            Logger.getLogger(MyFile.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        System.out.println(getTypeOfFile("c:\\file\\home\\abc.text"));
     }
 
     /**
@@ -57,21 +53,18 @@ public class MyFile {
      * @param pathFile path of file
      * @param content string of content
      */
-    public static void writeToFile(String pathFile, String content) {
-        try {
-            File file = new File(pathFile);
+    public static void writeToFile(String pathFile, String content) throws IOException {
 
-            // if file doesnt exists, then create it
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+        File file = new File(pathFile);
 
-            FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
-            try (BufferedWriter bw = new BufferedWriter(fw)) {
-                bw.write(content);
-            }
-        } catch (IOException x) {
-            System.err.println(x);
+        // if file doesnt exists, then create it
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+        try (BufferedWriter bw = new BufferedWriter(fw)) {
+            bw.write(content);
         }
     }
 
@@ -82,4 +75,14 @@ public class MyFile {
         String typeFile = types.get(types.size() - 1);
         return typeFile;
     }
+
+    public static String getFileName(String path) {
+        // check file type
+        List<String> temp = Arrays.asList(path.split("\\\\"));
+        String fullName = temp.get(temp.size() - 1);
+        temp = Arrays.asList(fullName.split("\\."));
+        String name = temp.get(0);
+        return name;
+    }
+    
 }

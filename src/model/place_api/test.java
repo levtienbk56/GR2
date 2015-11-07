@@ -6,6 +6,7 @@
 package model.place_api;
 
 import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +16,16 @@ import java.util.List;
 public class test {
 
     public static void main(String[] args) {
-        String s;
-        s = "{\"lat_lng\":21.3333}";
-        Gson gson = new Gson();
-        Location lo = gson.fromJson(s, Location.class);
-        System.out.println(lo.toString());
+//        String s;
+//        s = "{\"lat_lng\":21.3333}";
+//        Gson gson = new Gson();
+//        Location lo = gson.fromJson(s, Location.class);
+//        System.out.println(lo.toString());
+
+        List<String> l = new ArrayList<>();
+        l.add("hello");
+        l.add("world");
+        System.out.println(l);
     }
 
     class Location {
@@ -64,7 +70,7 @@ public class test {
         @Override
         public String toString() {
             String s = "lat:" + lat_lng + "\nlng:" + lng + "\nphotos:";
-            
+
             return s;
         }
 

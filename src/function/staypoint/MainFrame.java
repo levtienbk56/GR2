@@ -8,12 +8,8 @@ package function.staypoint;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import model.GPSPoint;
 import model.StayPoint;
 import utils.GPSPointExtractor;
@@ -23,13 +19,14 @@ import utils.file.MyFile;
  *
  * @author trungtran.vn
  */
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame implements MyView{
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        Presenter presenter  = new PresenterImpl(this);
     }
 
     /**
@@ -342,4 +339,39 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea tOutput;
     private javax.swing.JTextField tTimethresh;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public String getInputFilePath() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setInputFilePath() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getOutputFileName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getDisThresh() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getTimeThresh() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void appendOutputProcess() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setOutputProcess() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

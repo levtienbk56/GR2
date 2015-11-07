@@ -78,11 +78,23 @@ public class GPSPointExtractor {
         String line;
         int i = 0;
 
-        while ((line = reader.readLine()) != null) {
-            i++;
+        line = reader.readLine();
+        if (line != null) {
             List<String> items = Arrays.asList(line.split("\\s*,\\s*"));
-            GPSPoint co = new GPSPoint(new Double(items.get(3)), new Double(items.get(2)), items.get(1));
-            arr.add(co);
+
+            // remove header
+            if (!items.get(0).equals("name")) {
+                GPSPoint co = new GPSPoint(new Double(items.get(3)), new Double(items.get(2)), items.get(1));
+                arr.add(co);
+            }
+
+            //continue with other line
+            while ((line = reader.readLine()) != null) {
+                i++;
+                items = Arrays.asList(line.split("\\s*,\\s*"));
+                GPSPoint co = new GPSPoint(new Double(items.get(3)), new Double(items.get(2)), items.get(1));
+                arr.add(co);
+            }
         }
         return arr;
     }
