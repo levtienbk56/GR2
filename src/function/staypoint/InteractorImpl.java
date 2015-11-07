@@ -16,30 +16,34 @@ import utils.file.MyFile;
  *
  * @author trungtran.vn
  */
-public class Main {
+public class InteractorImpl implements Interactor{
 
     public static void main(String[] args) {
         try {
-            StayPointCalculator spc = new StayPointCalculator(50, 1200);
+            StayPointCalculator spc = new StayPointCalculator(30, 300);
             //get points
             ArrayList<GPSPoint> pointArray = GPSPointExtractor.extractFromFile("./resource/366_02.txt");
             //calculate
             ArrayList<StayPoint> stayPointArray = spc.extractStayPoints(pointArray);
 
             System.out.println("--- result ---");
-            String path = "output/366_02_50_1200.txt";
-            String s = "name,date time,longitude,latitude\n";
-            MyFile.writeToFile(path, s);
-            for (StayPoint sp : stayPointArray) {
-                s = "366,"
-                        + sp.getStartTime() + ","
-                        + sp.getAvgCoordinate().getLng() + ","
-                        + sp.getAvgCoordinate().getLat()+ "\n";
+            // moi stay point in ra 1 file chua tat ca cac point trong sp do
+            for (int i = 0; i < stayPointArray.size(); i++) {
+                String path = "output/listpoint/366_02_30_300_p" + i + ".txt";
+                String s = "name,date time,longitude,latitude\n";
                 MyFile.writeToFile(path, s);
+                StayPoint sp = stayPointArray.get(i);
+                for (GPSPoint p : sp.getArr()) {
+                    s = "366,"
+                            + p.getTime() + ","
+                            + p.getLng() + ","
+                            + p.getLat() + "\n";
+                    MyFile.writeToFile(path, s);
+                }
+
             }
         } catch (IOException | NumberFormatException ex) {
             System.out.println("read file error");
         }
     }
-
 }

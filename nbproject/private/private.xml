@@ -3,11 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NetbeansProjects/GR2/src/model/place_api/Photo.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/utils/http/ClientRequest.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/function/staypoint/InteractorImpl.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/utils/file/MyFile.java</file>
             <file>file:/D:/NetbeansProjects/GR2/src/model/place_api/test.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/model/place_api/NearBySearchResult.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/PresenterImpl.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/utils/GPSPointExtractor.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/MainFrame.java</file>
             <file>file:/D:/NetbeansProjects/GR2/src/model/place_api/Result.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/function/staypoint/StayPointCalculator.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/utils/http/ClientRequest.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/function/staypoint/Presenter.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/function/staypoint/PresenterImpl.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/model/place_api/NearBySearchResult.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/Presenter.java</file>
         </group>
     </open-files>
 </project-private>
