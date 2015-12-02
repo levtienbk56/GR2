@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Coordinate;
 
 /**
@@ -15,10 +17,14 @@ import model.Coordinate;
 public class GPScoordinateExtractor {
 
     public static void main(String[] args) {
-        GPScoordinateExtractor a = new GPScoordinateExtractor();
-
-        ArrayList<Coordinate> arr = a.extractFromFile("366.txt");
-        System.out.println(arr.get(0).getLat() + "," + arr.get(0).getLng());
+        try {
+            GPScoordinateExtractor a = new GPScoordinateExtractor();
+            
+            ArrayList<Coordinate> arr = a.extractFromFile("366.txt");
+            System.out.println(arr.get(0).getLat() + "," + arr.get(0).getLng());
+        } catch (Exception ex) {
+            Logger.getLogger(GPScoordinateExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -27,7 +33,7 @@ public class GPScoordinateExtractor {
      * @param pathFile path of file
      * @return arrayList of Coordinate(latitude, longitude)
      */
-    public ArrayList<Coordinate> extractFromFile(String pathFile) {
+    public ArrayList<Coordinate> extractFromFile(String pathFile) throws Exception{
         ArrayList<Coordinate> arr = new ArrayList();
 
         BufferedReader reader = MyFile.readFile(pathFile);

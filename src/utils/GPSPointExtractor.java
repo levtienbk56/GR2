@@ -26,7 +26,7 @@ public class GPSPointExtractor {
      * @throws java.io.IOException
      *
      */
-    public static ArrayList<GPSPoint> extractFromFile(String filePath) throws IOException, NumberFormatException {
+    public static ArrayList<GPSPoint> extractFromFile(String filePath) throws Exception {
         ArrayList<GPSPoint> arr = new ArrayList();
 
         String typeFile = MyFile.getTypeOfFile(filePath);
@@ -44,7 +44,7 @@ public class GPSPointExtractor {
         return arr;
     }
 
-    private static ArrayList<GPSPoint> extractFromPltFile(String filePath) throws IOException, NumberFormatException {
+    private static ArrayList<GPSPoint> extractFromPltFile(String filePath) throws Exception{
         ArrayList<GPSPoint> arr = new ArrayList();
         BufferedReader reader = MyFile.readFile(filePath);
         if (reader == null) {
@@ -69,7 +69,7 @@ public class GPSPointExtractor {
      * @return
      * @throws IOException
      */
-    private static ArrayList<GPSPoint> extractFromTxtFile(String filePath) throws IOException, NumberFormatException {
+    private static ArrayList<GPSPoint> extractFromTxtFile(String filePath) throws Exception{
         ArrayList<GPSPoint> arr = new ArrayList();
         BufferedReader reader = MyFile.readFile(filePath);
         if (reader == null) {

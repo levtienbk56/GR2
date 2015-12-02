@@ -12,8 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -32,7 +30,7 @@ public class MyFile {
      * @return buffer of content. you can extract: String line; while ((line =
      * reader.readLine()) != null){}
      */
-    public static BufferedReader readFile(String pathFile) {
+    public static BufferedReader readFile(String pathFile) throws Exception {
         System.out.println("begin read file...");
         InputStream in = null;
         BufferedReader reader = null;
@@ -42,7 +40,8 @@ public class MyFile {
             InputStreamReader inputStreamReader = new InputStreamReader(in);
             reader = new BufferedReader(inputStreamReader);
         } catch (IOException ex) {
-            Logger.getLogger(MyFile.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            throw new Exception("error read file: " + pathFile);
         }
         return reader;
     }
@@ -53,18 +52,22 @@ public class MyFile {
      * @param pathFile path of file
      * @param content string of content
      */
-    public static void writeToFile(String pathFile, String content) throws IOException {
+    public static void writeToFile(String pathFile, String content) throws Exception {
+        try {
+            File file = new File(pathFile);
 
-        File file = new File(pathFile);
+            // if file doesnt exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
 
-        // if file doesnt exists, then create it
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
-        try (BufferedWriter bw = new BufferedWriter(fw)) {
-            bw.write(content);
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+            try (BufferedWriter bw = new BufferedWriter(fw)) {
+                bw.write(content);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("error write file: " + pathFile);
         }
     }
 
@@ -84,5 +87,18 @@ public class MyFile {
         String name = temp.get(0);
         return name;
     }
-    
+
+    public static void createFolder(String name) throws Exception {
+        try {
+            File f = new File(name);
+            boolean success = false;
+            if (!f.exists()) {
+                success = f.mkdir();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new Exception("error create folder:" + name);
+        }
+    }
+
 }

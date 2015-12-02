@@ -10,5 +10,5 @@ package function.staypoint;
  * @author trungtran.vn
  */
 public interface Presenter {
-    
+    void doStart() throws Exception ;
 }

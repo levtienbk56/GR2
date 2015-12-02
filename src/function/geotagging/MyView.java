@@ -10,8 +10,6 @@ package function.geotagging;
  * @author trungtran.vn
  */
 public interface MyView {
-    String getInputFilePath();
+    String getInputFilePath() throws Exception;
     void appendOutputProcess(String log);
-    
-    
 }

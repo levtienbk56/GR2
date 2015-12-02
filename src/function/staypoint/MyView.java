@@ -10,11 +10,16 @@ package function.staypoint;
  * @author trungtran.vn
  */
 public interface MyView {
-    String getInputFilePath();
-    void setInputFilePath();
-    String getOutputFileName();
-    int getDisThresh();
-    int getTimeThresh();
-    void appendOutputProcess();
-    void setOutputProcess();
+
+    String getInputFilePath() throws Exception;
+
+    void setInputFilePath(String content);
+
+    int getDisThresh() throws Exception;
+
+    int getTimeThresh() throws Exception;
+
+    void appendOutputProcess(String content);
+
+    void setOutputProcess(String content);
 }

@@ -9,10 +9,7 @@ import model.StayPoint;
 public class StayPointCalculator {
 
     private double distThresh = 30;     // met
-    private long timeThresh = 20;       // second
-
-    public StayPointCalculator() {
-    }
+    private long timeThresh = 600;       // second
 
     public StayPointCalculator(double dis, long time) {
         this.distThresh = dis;
@@ -83,11 +80,6 @@ public class StayPointCalculator {
                 i = k;
             }
             i++;
-        }
-        System.out.println("--- end calculate sp ---");
-        System.out.println("there are " + arrStayPoints.size() + " SP");
-        for (StayPoint sp : arrStayPoints) {
-            System.out.println("-" + sp.size());
         }
         return arrStayPoints;
     }

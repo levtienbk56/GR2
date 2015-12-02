@@ -5,10 +5,18 @@
  */
 package function.staypoint;
 
+import java.util.ArrayList;
+import model.GPSPoint;
+import model.StayPoint;
+
 /**
  *
  * @author trungtran.vn
  */
 public interface Interactor {
-    
+    ArrayList<GPSPoint> extractPointsFromFile(String path) throws Exception;
+
+    ArrayList<StayPoint> computeStayPoints(ArrayList<GPSPoint> points, int disThresh, int timeThresh);
+
+    void writeOutFile(ArrayList<StayPoint> spArray, String path, int disThres, int timeThresh) throws Exception;
 }

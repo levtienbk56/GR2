@@ -6,27 +6,25 @@
 package function.staypoint;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import model.GPSPoint;
-import model.StayPoint;
-import utils.GPSPointExtractor;
-import utils.file.MyFile;
 
 /**
  *
  * @author trungtran.vn
  */
-public class MainFrame extends javax.swing.JFrame implements MyView{
+public class MainFrame extends javax.swing.JFrame implements MyView {
+
+    PresenterImpl presenter;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        Presenter presenter  = new PresenterImpl(this);
+        presenter = new PresenterImpl(this);
     }
 
     /**
@@ -50,8 +48,6 @@ public class MainFrame extends javax.swing.JFrame implements MyView{
         jLabel5 = new javax.swing.JLabel();
         tTimethresh = new javax.swing.JTextField();
         btStart = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        tOutFile = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -100,10 +96,6 @@ public class MainFrame extends javax.swing.JFrame implements MyView{
             }
         });
 
-        jLabel6.setText("output name");
-
-        tOutFile.setText("output");
-
         jLabel7.setText("m");
 
         jLabel8.setText("s");
@@ -124,28 +116,22 @@ public class MainFrame extends javax.swing.JFrame implements MyView{
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tOutFile, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(tDisthresh, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel7)
-                                                .addGap(46, 46, 46)
-                                                .addComponent(jLabel4)
-                                                .addGap(26, 26, 26)
-                                                .addComponent(tTimethresh, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel8)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(tDisthresh, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7)
+                                        .addGap(46, 46, 46)
+                                        .addComponent(jLabel4)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(tTimethresh, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(tFile, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
@@ -154,14 +140,12 @@ public class MainFrame extends javax.swing.JFrame implements MyView{
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jButton1))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel5)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(btStart)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(168, 168, 168)
+                        .addComponent(btStart)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,16 +175,11 @@ public class MainFrame extends javax.swing.JFrame implements MyView{
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tOutFile, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btStart, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -225,47 +204,10 @@ public class MainFrame extends javax.swing.JFrame implements MyView{
     }//GEN-LAST:event_tFileActionPerformed
 
     private void btStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStartActionPerformed
-        tOutput.setText("");
-        String pathFile = tFile.getText();
-        String nameFileOut = tOutFile.getText();
-        int d = convertString(tDisthresh.getText());
-        int t = convertString(tTimethresh.getText());
-
-        // check input
-        if ("".equals(pathFile) || "".equals(nameFileOut) || d == -1 || t == -1) {
-            tOutput.append("->wrong input's value\n");
-            return;
-        }
-
-        StayPointCalculator spc = new StayPointCalculator();
-        spc.setDistThresh(d);
-        spc.setTimeThresh(t);
-        // get points
-        tOutput.append("-> extracting... " + pathFile + "\n");
         try {
-            ArrayList<GPSPoint> pointArray = GPSPointExtractor.extractFromFile(pathFile);
-            tOutput.append("-> " + pointArray.size() + " point extracted." + "\n");
-
-            // calculate
-            tOutput.append("-> calculate Stay point ..." + "\n");
-            ArrayList<StayPoint> stayPointArray = spc.extractStayPoints(pointArray);
-            tOutput.append("-> " + stayPointArray.size() + " found" + "\n");
-            tOutput.append("-> write to file " + nameFileOut + "\n");
-
-            System.out.println("--- result ---");
-            String s = "name,date time,longitude,latitude\n";
-            MyFile.writeToFile(nameFileOut, s);
-            for (StayPoint sp : stayPointArray) {
-                s = "366,"
-                        + sp.getStartTime() + ","
-                        + sp.getAvgCoordinate().getLng() + ","
-                        + sp.getAvgCoordinate().getLat() + "\n";
-                MyFile.writeToFile(nameFileOut, s);
-            }
-
-            tOutput.append("-> Success\n");
-        } catch (IOException | NumberFormatException ex) {
-            tOutput.append("-> read file failed!!!\n");
+            presenter.doStart();
+        } catch (Exception ex) {
+            appendOutputProcess(ex.getMessage());
         }
 
     }//GEN-LAST:event_btStartActionPerformed
@@ -329,49 +271,66 @@ public class MainFrame extends javax.swing.JFrame implements MyView{
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField tDisthresh;
     private javax.swing.JTextField tFile;
-    private javax.swing.JTextField tOutFile;
     private javax.swing.JTextArea tOutput;
     private javax.swing.JTextField tTimethresh;
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public String getInputFilePath() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getInputFilePath() throws Exception {
+        String s = tFile.getText();
+        if (s == null || s.equals("")) {
+            throw new Exception("input file required");
+        }
+        return s;
     }
 
     @Override
-    public void setInputFilePath() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setInputFilePath(String content) {
+        tFile.setText(content);
     }
 
     @Override
-    public String getOutputFileName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getDisThresh() throws Exception {
+        String s = tDisthresh.getText();
+        if (s == null || s.equals("")) {
+            throw new Exception("Disthres required");
+        }
+        int i = 0;
+        try {
+            i = Integer.parseInt(s);
+        } catch (NumberFormatException ex) {
+            throw new Exception("disthres input form");
+        }
+        return i;
     }
 
     @Override
-    public int getDisThresh() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getTimeThresh() throws Exception {
+        String s = tTimethresh.getText();
+        if (s == null || s.equals("")) {
+            throw new Exception("Timethresh required");
+        }
+        int i = 0;
+        try {
+            i = Integer.parseInt(s);
+        } catch (NumberFormatException ex) {
+            throw new Exception("timeThres input form");
+        }
+        return i;
     }
 
     @Override
-    public int getTimeThresh() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void appendOutputProcess(String content) {
+        tOutput.append("=>" + content + "\n");
     }
 
     @Override
-    public void appendOutputProcess() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setOutputProcess() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setOutputProcess(String content) {
+        tOutput.setText("=>" + content + "\n");
     }
 }

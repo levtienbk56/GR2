@@ -15,21 +15,6 @@ import utils.http.ClientRequest;
  */
 public class NearBySearchResult {
 
-    private static final String URL_TEST = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=21.011557,105.849261&radius=50&key=AIzaSyAxT_lAlVf9oKHq1aCw47Qt0SJXnRWJbbs";
-
-    public static void main(String[] args) {
-        ClientRequest client = new ClientRequest();
-        String json = client.request(URL_TEST);
-
-        Gson gson = new Gson();
-        NearBySearchResult obj = gson.fromJson(json, NearBySearchResult.class);
-        for (Result result : obj.getResults()) {
-            for (String t : result.getTypes()) {
-                System.out.print(t + ", ");
-            }
-            System.out.println("");
-        }
-    }
     private List<String> htmlAttribution;
     private String nextPageToken;
     private List<Result> results;
@@ -77,4 +62,20 @@ public class NearBySearchResult {
         this.status = status;
     }
 
+    private static final String URL_TEST = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=21.011557,105.849261&radius=50&key=AIzaSyAxT_lAlVf9oKHq1aCw47Qt0SJXnRWJbbs";
+
+    public static void main(String[] args) {
+        ClientRequest client = new ClientRequest();
+        String json = client.request(URL_TEST);
+
+        Gson gson = new Gson();
+        NearBySearchResult obj = gson.fromJson(json, NearBySearchResult.class);
+        for (Result result : obj.getResults()) {
+
+            System.out.print(result.getId() + ", ");
+
+            System.out.println("");
+        }
+    }
+    
 }

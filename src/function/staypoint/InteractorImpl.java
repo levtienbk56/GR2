@@ -5,7 +5,6 @@
  */
 package function.staypoint;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import model.GPSPoint;
 import model.StayPoint;
@@ -16,34 +15,73 @@ import utils.file.MyFile;
  *
  * @author trungtran.vn
  */
-public class InteractorImpl implements Interactor{
+public class InteractorImpl implements Interactor {
 
-    public static void main(String[] args) {
-        try {
-            StayPointCalculator spc = new StayPointCalculator(30, 300);
-            //get points
-            ArrayList<GPSPoint> pointArray = GPSPointExtractor.extractFromFile("./resource/366_02.txt");
-            //calculate
-            ArrayList<StayPoint> stayPointArray = spc.extractStayPoints(pointArray);
+    /**
+     * read file and extract point
+     *
+     * @param path path of file
+     * @return
+     * @throws java.io.IOException
+     */
+    @Override
+    public ArrayList<GPSPoint> extractPointsFromFile(String path) throws Exception {
+        ArrayList<GPSPoint> pointArray = GPSPointExtractor.extractFromFile(path);
+        return pointArray;
+    }
 
-            System.out.println("--- result ---");
-            // moi stay point in ra 1 file chua tat ca cac point trong sp do
-            for (int i = 0; i < stayPointArray.size(); i++) {
-                String path = "output/listpoint/366_02_30_300_p" + i + ".txt";
-                String s = "name,date time,longitude,latitude\n";
-                MyFile.writeToFile(path, s);
-                StayPoint sp = stayPointArray.get(i);
-                for (GPSPoint p : sp.getArr()) {
-                    s = "366,"
-                            + p.getTime() + ","
-                            + p.getLng() + ","
-                            + p.getLat() + "\n";
-                    MyFile.writeToFile(path, s);
-                }
+    @Override
+    public ArrayList<StayPoint> computeStayPoints(ArrayList<GPSPoint> points, int disThresh, int timeThresh) {
+        StayPointCalculator spc = new StayPointCalculator(disThresh, timeThresh);
 
+        ArrayList<StayPoint> spArr = spc.extractStayPoints(points);
+        return spArr;
+    }
+
+    /**
+     * the result has construct: |folder[name of input] *|file[centroids] //
+     * list centroid |folder[lists] *|file[sp1] //list point of sp1 **|file[sp2]
+     *
+     * @param spArray
+     */
+    @Override
+    public void writeOutFile(ArrayList<StayPoint> spArray, String path, int disThres, int timeThresh) throws Exception {
+        String folderName = MyFile.getFileName(path) + "_"
+                + disThres + "_"
+                + timeThresh;
+        MyFile.createFolder("output");
+        MyFile.createFolder("output/" + folderName);
+        folderName = "output/" + folderName;
+        String fileName = folderName + "/centroids.txt";
+        String s = "name,date time,longitude,latitude\n";
+
+        // write to centroid file
+        MyFile.writeToFile(fileName, s);
+        for (int i = 0; i < spArray.size(); i++) {
+            StayPoint sp = spArray.get(i);
+            s = i + ","
+                    + sp.getStartTime() + ","
+                    + sp.getAvgCoordinate().getLng() + ","
+                    + sp.getAvgCoordinate().getLat() + "\n";
+            MyFile.writeToFile(fileName, s);
+        }
+
+        // write to list 
+        folderName += "/lists";
+        MyFile.createFolder(folderName);
+        for (int i = 0; i < spArray.size(); i++) {
+            StayPoint sp = spArray.get(i);
+            fileName = folderName + "/" + i + ".txt";
+
+            s = "name,date time,longitude,latitude\n";
+            MyFile.writeToFile(fileName, s);
+            for (GPSPoint p : sp.getArr()) {
+                s = i + ","
+                        + p.getTime() + ","
+                        + p.getLng() + ","
+                        + p.getLat() + "\n";
+                MyFile.writeToFile(fileName, s);
             }
-        } catch (IOException | NumberFormatException ex) {
-            System.out.println("read file error");
         }
     }
 }
