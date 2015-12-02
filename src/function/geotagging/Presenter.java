@@ -10,5 +10,5 @@ package function.geotagging;
  * @author trungtran.vn
  */
 public interface Presenter {
-    void doStart() throws Exception;
+    void doStart(String input) throws Exception;
 }

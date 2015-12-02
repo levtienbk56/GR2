@@ -19,7 +19,7 @@ import utils.http.ClientRequest;
  * @author trungtran.vn
  */
 public class NearbyPlaceAPI {
-
+    private static final String API_KEY="AIzaSyAxT_lAlVf9oKHq1aCw47Qt0SJXnRWJbbs";
     public static void main(String[] args) {
 
     }
@@ -38,9 +38,8 @@ public class NearbyPlaceAPI {
             String url;
             Gson gson = new Gson();
             ClientRequest client = new ClientRequest();
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + point.getLat() + "," + point.getLng() + "&radius=" + radius + "&key=AIzaSyAXZmFJzkW8OftEL44WLEm6V-RfShvGPvc";
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + point.getLat() + "," + point.getLng() + "&radius=" + radius + "&key="+API_KEY;
             String json = client.request(url);
-            System.out.println(url);
             NearBySearchResult obj = gson.fromJson(json, NearBySearchResult.class);
             results = obj.getResults();
             for (Result x : results) {

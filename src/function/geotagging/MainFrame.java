@@ -6,6 +6,11 @@
 package function.geotagging;
 
 import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -36,15 +41,16 @@ public class MainFrame extends javax.swing.JFrame implements MyView {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tInput = new javax.swing.JTextField();
-        btBrowse = new javax.swing.JButton();
+        tInput1 = new javax.swing.JTextField();
+        btBrowse1 = new javax.swing.JButton();
         bStart = new javax.swing.JButton();
-        cbMethod = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tOutput = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        tInput2 = new javax.swing.JTextField();
+        btBrowse2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -54,12 +60,12 @@ public class MainFrame extends javax.swing.JFrame implements MyView {
         jLabel1.setText("Request Nearby Place");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("input");
+        jLabel2.setText("input (file)");
 
-        btBrowse.setText("browse...");
-        btBrowse.addActionListener(new java.awt.event.ActionListener() {
+        btBrowse1.setText("browse...");
+        btBrowse1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBrowseActionPerformed(evt);
+                btBrowse1ActionPerformed(evt);
             }
         });
 
@@ -71,10 +77,6 @@ public class MainFrame extends javax.swing.JFrame implements MyView {
                 bStartActionPerformed(evt);
             }
         });
-
-        cbMethod.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "join all" }));
-
-        jLabel3.setText("method");
 
         tOutput.setColumns(20);
         tOutput.setRows(5);
@@ -89,6 +91,16 @@ public class MainFrame extends javax.swing.JFrame implements MyView {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel5.setText("input (folder)");
+
+        btBrowse2.setText("browse...");
+        btBrowse2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBrowse2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,30 +110,29 @@ public class MainFrame extends javax.swing.JFrame implements MyView {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(12, 12, 12)
-                                .addComponent(cbMethod, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4))
+                        .addComponent(jLabel4)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(tInput)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btBrowse)
-                                .addGap(13, 13, 13))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addComponent(jButton1))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(158, 158, 158)
                 .addComponent(bStart, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tInput1)
+                    .addComponent(tInput2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btBrowse1)
+                    .addComponent(btBrowse2))
+                .addGap(13, 13, 13))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,16 +141,17 @@ public class MainFrame extends javax.swing.JFrame implements MyView {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(tInput, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btBrowse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btBrowse1, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel2))
+                    .addComponent(tInput1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel5)
+                    .addComponent(tInput2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btBrowse2))
+                .addGap(16, 16, 16)
                 .addComponent(bStart, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
@@ -150,32 +162,71 @@ public class MainFrame extends javax.swing.JFrame implements MyView {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBrowseActionPerformed
+    private void btBrowse1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBrowse1ActionPerformed
         //Create a file chooser
         final JFileChooser fc = new JFileChooser();
         //Handle open button action.
-        if (evt.getSource() == btBrowse) {
+        if (evt.getSource() == btBrowse1) {
             int returnVal = fc.showOpenDialog(MainFrame.this);
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-                tInput.setText(file.getPath());
+                tInput1.setText(file.getPath());
             }
         }
-    }//GEN-LAST:event_btBrowseActionPerformed
+    }//GEN-LAST:event_btBrowse1ActionPerformed
 
     private void bStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStartActionPerformed
+
         try {
-            presenter.doStart();
+            checkInput();
+            String s1 = tInput1.getText();
+            // when input is only file
+            if (!s1.equals("")) {
+                presenter.doStart(s1);
+            } else {  //input is a folder
+                List<String> arr = getInputFolderPath();
+                System.out.println("arr size: " + arr.size());
+                for (String path : arr) {
+                    presenter.doStart(path);
+                }
+            }
+
         } catch (Exception ex) {
             appendOutputProcess(ex.getMessage());
+            ex.printStackTrace();
         }
     }//GEN-LAST:event_bStartActionPerformed
 
+    private void checkInput() throws Exception {
+        String s1 = tInput1.getText();
+        System.out.println("s1: " + s1);
+        String s2 = tInput2.getText();
+        System.out.println("s2:" + s2);
+        if ((s1 == null || s1.equals("")) && (s2 == null || s2.equals(""))) {
+            throw new Exception("input file required");
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JOptionPane.showMessageDialog(this,
-                "input file has format: each line is one point: [id],[date time],[longitude],[latitude]");
+                "input file has format: each line is one point: [id],[date time],[longitude],[latitude]\n"
+                + "input file is default, if blank, app run with input folder (option)");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btBrowse2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBrowse2ActionPerformed
+        //Create a file chooser
+        final JFileChooser fc = new JFileChooser();
+        //Handle open button action.
+        if (evt.getSource() == btBrowse2) {
+            fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fc.setAcceptAllFileFilterUsed(false);
+
+            if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                tInput2.setText(file.getAbsolutePath());
+            }
+        }
+    }//GEN-LAST:event_btBrowse2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,29 +265,59 @@ public class MainFrame extends javax.swing.JFrame implements MyView {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bStart;
-    private javax.swing.JButton btBrowse;
-    private javax.swing.JComboBox cbMethod;
+    private javax.swing.JButton btBrowse1;
+    private javax.swing.JButton btBrowse2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField tInput;
+    private javax.swing.JTextField tInput1;
+    private javax.swing.JTextField tInput2;
     private javax.swing.JTextArea tOutput;
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public String getInputFilePath() throws Exception{
-        String s = tInput.getText();
+    public String getInputFilePath() throws Exception {
+        String s = tInput1.getText();
+        return s;
+    }
+
+    @Override
+    public List<String> getInputFolderPath() throws Exception {
+        String s = tInput2.getText();
+        ArrayList<String> arr = new ArrayList<>();
+
         if (s == null || s.equals("")) {
             throw new Exception("input file required");
+        } else {
+            File f = new File(s);
+
+            FilenameFilter textFilter = new FilenameFilter() {
+                public boolean accept(File dir, String name) {
+                    return name.toLowerCase().endsWith(".txt");
+                }
+            };
+
+            File[] files = f.listFiles(textFilter);
+            for (File file : files) {
+                if (!file.isDirectory()) {
+                    arr.add(file.getAbsolutePath());
+                    System.out.println(file.getAbsoluteFile());
+                }
+            }
         }
-        return s;
+        return arr;
     }
 
     @Override
     public void appendOutputProcess(String log) {
         tOutput.append("=>" + log + "\n");
+    }
+
+    @Override
+    public void setOutputProcess(String content) {
+        tOutput.setText("=>" + content + "\n");
     }
 }

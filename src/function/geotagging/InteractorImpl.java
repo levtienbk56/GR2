@@ -46,7 +46,7 @@ public class InteractorImpl implements Interactor {
 
         // nếu ko tìm thấy giao điểm, thử mở rộng phạm vi
         while (true) {
-            radius += 10;
+            radius += 20;
             System.out.println("----findNearbyPlace radius = " + radius + "-------");
             if (radius > 100) {
                 break;
@@ -59,11 +59,12 @@ public class InteractorImpl implements Interactor {
                 GPSPoint point = sp.getArr().get(i);
                 results = NearbyPlaceAPI.requestNearbyPlace(point, radius);
                 intersection.retainAll(results);  // lấy giao 2 tập hợp
+                System.out.println("intersection size: " + intersection.size());
                 if (intersection.isEmpty()) {
                     break;   // thử lại với phạm vi lớn hơn
                 }
             }
-            System.out.println("--in while --");
+            System.out.println("-- after for --");
             for (Result r : intersection) {
                 System.out.println(r.getName());
             }
@@ -92,7 +93,8 @@ public class InteractorImpl implements Interactor {
 
     @Override
     public void writeOutFile(ArrayList<Result> rs, String inputPathFile) throws Exception {
-        String fileName = MyFile.getFileName(inputPathFile) + "_nearbyPlaces.txt";
+        MyFile.createFolder("output_geotaging");
+        String fileName = "output_geotaging/" + MyFile.getFileName(inputPathFile) + "_nearbyPlaces.txt";
 
         // write to centroid file
         // file[id,name,types]

@@ -5,11 +5,15 @@
  */
 package function.geotagging;
 
+import java.util.List;
+
 /**
  *
  * @author trungtran.vn
  */
 public interface MyView {
     String getInputFilePath() throws Exception;
+    List<String> getInputFolderPath() throws Exception;
     void appendOutputProcess(String log);
+    void setOutputProcess(String content);
 }

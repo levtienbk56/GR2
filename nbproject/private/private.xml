@@ -4,16 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/InteractorImpl.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/function/staypoint/InteractorImpl.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/MyView.java</file>
             <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/PresenterImpl.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/Interactor.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/function/staypoint/MainFrame.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/utils/GPSPointExtractor.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/Test.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/model/GPSPoint.java</file>
-            <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/NearbyPlaceAPI.java</file>
             <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/MainFrame.java</file>
+            <file>file:/D:/NetbeansProjects/GR2/src/function/geotagging/NearbyPlaceAPI.java</file>
         </group>
     </open-files>
 </project-private>

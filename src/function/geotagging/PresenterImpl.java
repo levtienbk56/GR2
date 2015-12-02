@@ -25,12 +25,12 @@ public class PresenterImpl implements Presenter {
     }
 
     @Override
-    public void doStart() throws Exception {
-        String inputPathFile = view.getInputFilePath();
+    public void doStart(String inputPathFile) throws Exception {
+        
         Gson gson = new Gson();
         
         // extract point from file
-        view.appendOutputProcess("start extract file...");
+        view.setOutputProcess("start extract file...");
         StayPoint sp = interactor.extractPointsFromFile(inputPathFile);
         view.appendOutputProcess("extract from file: " + sp.getArr().size() +" point(s)");
         
