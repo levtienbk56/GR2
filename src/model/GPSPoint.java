@@ -54,7 +54,6 @@ public class GPSPoint extends Coordinate {
             SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date1 = fm.parse(time1);
             Date date2 = fm.parse(time2);
-
             return (date2.getTime() - date1.getTime()) / 1000;
         } catch (ParseException ex) {
 

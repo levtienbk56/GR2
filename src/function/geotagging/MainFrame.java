@@ -27,7 +27,7 @@ public class MainFrame extends javax.swing.JFrame implements MyView {
      */
     public MainFrame() {
         initComponents();
-
+        tOutput.setText("");
     }
 
     /**

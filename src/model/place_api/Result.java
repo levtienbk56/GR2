@@ -5,7 +5,6 @@
  */
 package model.place_api;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
