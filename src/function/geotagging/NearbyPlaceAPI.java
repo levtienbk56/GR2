@@ -29,7 +29,7 @@ public class NearbyPlaceAPI {
      *
      * @param point: gps coordinate point
      * @param radius: limit ranger
-     * @return
+     * @return list of results (Result object)
      */
     public static List<Result> requestNearbyPlace(Coordinate point, int radius) {
         List<Result> results = new ArrayList<>();
@@ -53,7 +53,7 @@ public class NearbyPlaceAPI {
         try {
             System.out.println("requestNearbyPlace: " + point.getLat() + "," + point.getLng() + ":" + r.size());
             for (String x : r.get(0).getTypes()) {
-                System.out.print("- " + x);
+                System.out.println("    -" + x);
             }
             System.out.println("");
         } catch (Exception ex) {

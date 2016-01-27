@@ -44,7 +44,7 @@ public class GPSPointExtractor {
         return arr;
     }
 
-    private static ArrayList<GPSPoint> extractFromPltFile(String filePath) throws Exception{
+    private static ArrayList<GPSPoint> extractFromPltFile(String filePath) throws Exception {
         ArrayList<GPSPoint> arr = new ArrayList();
         BufferedReader reader = MyFile.readFile(filePath);
         if (reader == null) {
@@ -55,8 +55,11 @@ public class GPSPointExtractor {
 
         while ((line = reader.readLine()) != null) {
             i++;
+            if (i < 7) {
+                continue;
+            }
             List<String> items = Arrays.asList(line.split("\\s*,\\s*"));  // <any space>,<any space>
-            GPSPoint co = new GPSPoint(new Double(items.get(2)), new Double(items.get(3)), items.get(1));
+            GPSPoint co = new GPSPoint(new Double(items.get(0)), new Double(items.get(1)), items.get(5) + " " + items.get(6));
             arr.add(co);
         }
         return arr;
@@ -69,7 +72,7 @@ public class GPSPointExtractor {
      * @return
      * @throws IOException
      */
-    private static ArrayList<GPSPoint> extractFromTxtFile(String filePath) throws Exception{
+    private static ArrayList<GPSPoint> extractFromTxtFile(String filePath) throws Exception {
         ArrayList<GPSPoint> arr = new ArrayList();
         BufferedReader reader = MyFile.readFile(filePath);
         if (reader == null) {

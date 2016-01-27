@@ -228,6 +228,14 @@ public class Result {
         return types;
     }
 
+    public String getTypesInString() {
+        String str = "";
+        for (String s : types) {
+            str += s + ",";
+        }
+        return str;
+    }
+
     public void setTypes(List<String> types) {
         this.types = types;
     }

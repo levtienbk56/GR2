@@ -12,9 +12,9 @@ import java.util.ArrayList;
  * @author Lev Tien
  */
 public class StayPoint {
-
+    private String userId ="000";
     private ArrayList<GPSPoint> arr = new ArrayList<>();    //list of point 
-    private Coordinate avgCoordinate = new Coordinate();                       //centroid 
+    private Coordinate avgCoordinate = new Coordinate();    //centroid 
     private String startTime;
     private String endTime;
 
@@ -52,6 +52,15 @@ public class StayPoint {
         this.endTime = endTime;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+    
+
     public void computeAvgCoordinate() {
         double lat = 0, lng = 0;
         for (Coordinate p : arr) {
@@ -85,4 +94,10 @@ public class StayPoint {
     public int size() {
         return arr.size();
     }
+
+    @Override
+    public String toString() {
+        return "avgCoordinate=" + avgCoordinate + ", startTime=" + startTime + ", endTime=" + endTime;
+    }
+
 }

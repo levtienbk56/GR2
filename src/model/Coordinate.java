@@ -51,6 +51,12 @@ public class Coordinate {
         return Math.sqrt(Math.pow(b.lat - a.lat, 2) + Math.pow(b.lng - a.lng, 2));
     }
 
+    /**
+     * calculate distance between 2 points
+     * @param x 
+     * @param y
+     * @return distance in meter
+     */
     public static double distance(Coordinate x, Coordinate y) {
         double dLat = toRad(y.getLat() - x.getLat());
         double dLng = toRad(y.getLng() - x.getLng());
@@ -70,13 +76,13 @@ public class Coordinate {
 
     public static void main(String[] args) {
         Coordinate x = new Coordinate(39.90732, 116.45353);
-        Coordinate y = new Coordinate(39.90729, 116.45348);
+        Coordinate y = new Coordinate(39.90732, 116.45354);
 
         System.out.println(Coordinate.distance(x, y));
     }
-    
-    public void show(){
-        System.out.println("lat: " + lat);
-        System.out.println("lng: " + lng);
+
+    @Override
+    public String toString() {
+        return "lat=" + lat + ", lng=" + lng;
     }
 }

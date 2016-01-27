@@ -5,6 +5,7 @@ import java.util.List;
 import model.Coordinate;
 import model.GPSPoint;
 import model.StayPoint;
+import utils.GPSPointExtractor;
 
 public class StayPointCalculator {
 
@@ -99,5 +100,17 @@ public class StayPointCalculator {
     public void setTimeThresh(long timeThresh) {
         this.timeThresh = timeThresh;
     }
-
+    public static void main(String[] args) throws Exception {
+        List<GPSPoint> points = GPSPointExtractor.extractFromFile("D:\\GR\\Geolife Trajectories 1.3\\Geolife Trajectories 1.3\\Data\\000\\Trajectory\\20081111001704.plt");
+        System.out.println(points.size());
+        System.out.println(points.get(1));
+        StayPointCalculator sp = new StayPointCalculator(30, 600);
+        List<StayPoint> staypoints = sp.extractStayPoints(points);
+        for (StayPoint s : staypoints) {
+            System.out.println(s.toString());
+            for (GPSPoint p : s.getArr()) {
+                System.out.println("\t" + p.toString());
+            }
+        }
+    }
 }

@@ -84,4 +84,22 @@ public class InteractorImpl implements Interactor {
             }
         }
     }
+
+    public void writeOutFile(ArrayList<StayPoint> spArray, String path) throws Exception {
+        String folderName = MyFile.getFileName(path);
+        MyFile.createFolder("output");
+        MyFile.createFolder("output/" + folderName);
+        folderName = "output/" + folderName;
+        String fileName = folderName + "/centroids.txt";
+
+        String s;
+        for (int i = 0; i < spArray.size(); i++) {
+            StayPoint sp = spArray.get(i);
+            s = i + ","
+                    + sp.getStartTime() + ","
+                    + sp.getAvgCoordinate().getLng() + ","
+                    + sp.getAvgCoordinate().getLat() + "\n";
+            MyFile.writeToFile(fileName, s);
+        }
+    }
 }

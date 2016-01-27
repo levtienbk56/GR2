@@ -99,12 +99,12 @@ public class InteractorImpl implements Interactor {
         // write to centroid file
         // file[id,name,types]
         for (Result r : rs) {
-            String content = "";
+            String tags = "";
             for (String s : r.getTypes()) {
-                content = content + "," + s;
+                tags = tags + "," + s;
             }
-            content = r.getId() + "," + r.getName() + content + "\n";
-            MyFile.writeToFile(fileName, content);
+            tags = r.getId() + "," + r.getName() + tags + "\n";
+            MyFile.writeToFile(fileName, tags);
         }
     }
 
