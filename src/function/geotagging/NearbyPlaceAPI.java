@@ -19,7 +19,9 @@ import utils.http.ClientRequest;
  * @author trungtran.vn
  */
 public class NearbyPlaceAPI {
-    private static final String API_KEY="AIzaSyAxT_lAlVf9oKHq1aCw47Qt0SJXnRWJbbs";
+
+    private static final String API_KEY = "AIzaSyAxT_lAlVf9oKHq1aCw47Qt0SJXnRWJbbs";
+
     public static void main(String[] args) {
 
     }
@@ -38,7 +40,7 @@ public class NearbyPlaceAPI {
             String url;
             Gson gson = new Gson();
             ClientRequest client = new ClientRequest();
-            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + point.getLat() + "," + point.getLng() + "&radius=" + radius + "&key="+API_KEY;
+            url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + point.getLat() + "," + point.getLng() + "&radius=" + radius + "&key=" + API_KEY;
             String json = client.request(url);
             NearBySearchResult obj = gson.fromJson(json, NearBySearchResult.class);
             results = obj.getResults();
@@ -50,15 +52,7 @@ public class NearbyPlaceAPI {
         } catch (NullPointerException e) {
 
         }
-        try {
-            System.out.println("requestNearbyPlace: " + point.getLat() + "," + point.getLng() + ":" + r.size());
-            for (String x : r.get(0).getTypes()) {
-                System.out.println("    -" + x);
-            }
-            System.out.println("");
-        } catch (Exception ex) {
 
-        }
         return r;
     }
 

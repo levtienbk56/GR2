@@ -91,7 +91,9 @@ public class GPSPoint extends Coordinate {
     }
 
     /**
-     * only compare longitude & latitude. for reducing
+     * dùng để compare related_points.
+     * giảm số request phải làm.
+     * các related_point có khoảng cách dưới 8m, vẫn cho là bằng nhau
      *
      * @param obj
      * @return
@@ -105,13 +107,13 @@ public class GPSPoint extends Coordinate {
             return false;
         }
         final GPSPoint other = (GPSPoint) obj;
-
-        // get only 5 decimals (~0.8 meter)
-        // +-0.8m still equals
-        double lat1 = round(this.getLat(), 5);
-        double lng1 = round(this.getLng(), 5);
-        double lat2 = round(other.getLat(), 5);
-        double lng2 = round(other.getLng(), 5);
+        
+        // get only 4 decimals (~8 meter)
+        // +-8m still equals
+        double lat1 = round(this.getLat(), 4);
+        double lng1 = round(this.getLng(), 4);
+        double lat2 = round(other.getLat(), 4);
+        double lng2 = round(other.getLng(), 4);
         if (!(lat1 == lat2) || !(lng1 == lng2)) {
             return false;
         }
@@ -125,7 +127,7 @@ public class GPSPoint extends Coordinate {
      * @param places number decimal
      * @return a double number
      */
-    private static double round(double value, int places) {
+    public static double round(double value, int places) {
         if (places < 0) {
             throw new IllegalArgumentException();
         }

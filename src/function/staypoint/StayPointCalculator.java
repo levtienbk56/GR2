@@ -68,7 +68,9 @@ public class StayPointCalculator {
                 if (deltaTime > timeThresh) {
                     int l;
                     for (l = i; l <= k; l++) {
-                        sp.getArr().add(arrLog.get(l));
+                        if (!sp.getArr().contains(arrLog.get(l))) {
+                            sp.getArr().add(arrLog.get(l));
+                        }
                     }
                     sp.setStartTime(pi.getTime());
                     sp.setEndTime(pj.getTime());
@@ -100,11 +102,12 @@ public class StayPointCalculator {
     public void setTimeThresh(long timeThresh) {
         this.timeThresh = timeThresh;
     }
+
     public static void main(String[] args) throws Exception {
-        List<GPSPoint> points = GPSPointExtractor.extractFromFile("D:\\GR\\Geolife Trajectories 1.3\\Geolife Trajectories 1.3\\Data\\000\\Trajectory\\20081111001704.plt");
+        List<GPSPoint> points = GPSPointExtractor.extractFromFile("D:\\NetbeansProjects\\GR2\\resource\\366_02.txt");
         System.out.println(points.size());
         System.out.println(points.get(1));
-        StayPointCalculator sp = new StayPointCalculator(30, 600);
+        StayPointCalculator sp = new StayPointCalculator(30, 1200);
         List<StayPoint> staypoints = sp.extractStayPoints(points);
         for (StayPoint s : staypoints) {
             System.out.println(s.toString());

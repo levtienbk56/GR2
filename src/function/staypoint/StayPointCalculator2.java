@@ -5,7 +5,7 @@ import java.util.List;
 import model.Coordinate;
 import model.GPSPoint;
 import model.StayPoint;
-import model.dao.GPSPointDAO;
+import model.dao.GPSPointGeolifeDAO;
 import utils.GPSPointExtractor;
 
 public class StayPointCalculator2 {
@@ -49,6 +49,7 @@ public class StayPointCalculator2 {
                     if ((deltaTime > timeThresh) || (j == pointNum - 1)) {
                         StayPoint sp = new StayPoint();
                         for (k = i; k <= j - 1; k++) {
+                            // thêm related_point vào Sp
                             // chỉ add thêm mới, nhằm giảm số request khi geotaging
                             // @see GPSPoint equal()
                             if (!sp.getArr().contains(arrLog.get(k))) {
@@ -93,12 +94,12 @@ public class StayPointCalculator2 {
     }
 
     public static void main(String[] args) throws Exception {
-        List<GPSPoint> points = GPSPointExtractor.extractFromFile("D:\\GR\\Geolife Trajectories 1.3\\Geolife Trajectories 1.3\\Data\\000\\Trajectory\\20081112091400.plt");
+        List<GPSPoint> points = GPSPointExtractor.extractFromFile("D:\\NetbeansProjects\\GR2\\resource\\366_02.txt");
         
-//        GPSPointDAO dao = new GPSPointDAO();
+//        GPSPointGeolifeDAO dao = new GPSPointGeolifeDAO();
 //        List<GPSPoint> points = dao.selectByDate("2008-11-11");
         
-        StayPointCalculator2 sp = new StayPointCalculator2(30, 600);
+        StayPointCalculator2 sp = new StayPointCalculator2(30, 1200);
         List<StayPoint> staypoints = sp.extractStayPoints(points);
         for (StayPoint s : staypoints) {
             System.out.println(s.toString());

@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * @author Lev Tien
  */
 public class StayPoint {
-    private String userId ="000";
+    private int id;
+    private String userId = "366";
     private ArrayList<GPSPoint> arr = new ArrayList<>();    //list of point 
     private Coordinate avgCoordinate = new Coordinate();    //centroid 
     private String startTime;
@@ -26,6 +27,14 @@ public class StayPoint {
         this.avgCoordinate = avgCoordinate;
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Coordinate getAvgCoordinate() {
@@ -59,7 +68,6 @@ public class StayPoint {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-    
 
     public void computeAvgCoordinate() {
         double lat = 0, lng = 0;
@@ -67,8 +75,8 @@ public class StayPoint {
             lat += p.getLat();
             lng += p.getLng();
         }
-        avgCoordinate.setLat(lat / arr.size());
-        avgCoordinate.setLng(lng / arr.size());
+        avgCoordinate.setLat(GPSPoint.round(lat / arr.size(), 5));
+        avgCoordinate.setLng(GPSPoint.round(lng / arr.size(), 6));
     }
 
     public ArrayList<GPSPoint> getArr() {

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Result {
 
-    private static final String[] array = {
+    public static final String[] array = {
         "amusement_park",
         "aquarium",
         "art_gallery",

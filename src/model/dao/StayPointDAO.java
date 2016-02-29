@@ -11,7 +11,10 @@ import database.DBConnectHelper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import model.Coordinate;
+import model.GPSPoint;
 import model.StayPoint;
 
 /**
@@ -28,8 +31,8 @@ public class StayPointDAO {
 
     public static void main(String[] args) {
         StayPointDAO dao = new StayPointDAO();
-        dao.insertTest();
-        System.out.println(dao.selectInsertId());
+
+        System.out.println(dao.selectAll().size());
     }
 
     public void insertTest() {
@@ -59,7 +62,6 @@ public class StayPointDAO {
             ex.printStackTrace();
             id = - 1;
         }
-
         return id;
     }
 
@@ -78,6 +80,52 @@ public class StayPointDAO {
             id = - 1;
         }
         return id;
+    }
+
+    public List<StayPoint> selectAll() {
+        List<StayPoint> list = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM staypoints";
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                StayPoint obj = new StayPoint();
+                obj.setId(rs.getInt("staypoint_id"));
+                obj.setUserId(rs.getString("user_id"));
+                obj.setAvgCoordinate(new Coordinate(rs.getDouble("lat"), rs.getDouble("lng")));
+                obj.setStartTime(rs.getString("date_start") + " " + rs.getString("time_start"));
+                obj.setEndTime(rs.getString("date_end") + " " + rs.getString("time_end"));
+
+                list.add(obj);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Statement Error");
+        }
+        return list;
+    }
+
+    public List<StayPoint> selectByDate(String date) {
+        List<StayPoint> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM staypoints WHERE date_start=?";
+
+            PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sql);
+            ps.setString(1, date);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                StayPoint obj = new StayPoint();
+                obj.setId(rs.getInt("staypoint_id"));
+                obj.setUserId(rs.getString("user_id"));
+                obj.setAvgCoordinate(new Coordinate(rs.getDouble("lat"), rs.getDouble("lng")));
+                obj.setStartTime(rs.getString("date_start") + " " + rs.getString("time_start"));
+                obj.setEndTime(rs.getString("date_end") + " " + rs.getString("time_end"));
+
+                list.add(obj);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Statement Error");
+        }
+        return list;
     }
 
 }
