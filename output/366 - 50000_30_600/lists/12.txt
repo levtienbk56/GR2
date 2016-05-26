@@ -1,0 +1,4 @@
+name,date time,longitude,latitude
+12,2008-02-03 03:22:39,116.44866,39.80609
+name,date time,longitude,latitude
+12,2008-02-03 03:22:39,116.44866,39.80609

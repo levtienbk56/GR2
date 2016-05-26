@@ -1,0 +1,2 @@
+name,date time,longitude,latitude
+3,2010-05-23 16:50:50,-94.5931743,39.0935326667

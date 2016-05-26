@@ -1,4 +1,0 @@
-a f g -1 a c -1 a c d f g k -1 d -1 a f k c f -1 a -1 a b c -1 a c f k -1 d -1 c f -1 -2
-a d -1 c f k -1 b c -1 a e l m -1 a c e f g k -1 d -1 a f k c f -1 -2
-e f -1 a b -1 d f -1 c f k c -1 b -1 -2
-e f k -1 g -1 a f l m -1 c -1 b -1 c -1 a d f k m -1 c -1 b c -1 a e -1 -2
